@@ -11,5 +11,6 @@ function applicationWatcher(appName, eventType, appObject)
     end
   end
 end
+
 appWatcher = hs.application.watcher.new(applicationWatcher)
 appWatcher:start()
