@@ -81,6 +81,9 @@ hs.hotkey.bind({ "ctrl", "cmd" }, "H", function()
   hs.executeTerminal("/usr/local/bin/exec-in ~/.hammerspoon /Users/charles/bin/nvim init.lua")
 end)
 
+hs.alert.defaultStyle.atScreenEdge = 1
+
+
 -- Reload automatically
 hs.loadSpoon("ReloadConfiguration")
 spoon.ReloadConfiguration:start()

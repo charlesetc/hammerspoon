@@ -1,26 +1,33 @@
 hs.hotkey.bind({"cmd", "ctrl"}, "down", function()
-  local screenFrame = hs.screen.mainScreen():frame()
+  local screen = hs.screen.mainScreen():frame()
   local win = hs.window.frontmostWindow()
   local app = win:application()
 
-  local ratio_x = 0.85
-  local ratio_y = 0.9
+  local w = screen.w * 0.85
+  local h = screen.h * 0.9
 
   if app:name() == "iTerm2" then
-    ratio_x = 0.6
-    ratio_y = 0.7
-  elseif app:name() == "The Archive" then
-    ratio_x = 0.6
-    ratio_y = 0.85
+    w = screen.w * 0.6
+    h = screen.h * 0.7
   end
-  
-  local newFrame = {
-      x = screenFrame.x + (screenFrame.w * (1 - ratio_x) / 2),
-      y = screenFrame.y + (screenFrame.h * (1 - ratio_y) / 2),
-      w = screenFrame.w * ratio_x,
-      h = screenFrame.h * ratio_y,
-  }
 
-  win:setFrame(newFrame)
+  if app:name() == "The Archive" then
+    w = 800
+    h = 700
+  end
+  -- hs.alert("Window resized to " .. w .. "x" .. h .. " and screen is " .. screen.w .. "x" .. screen.h .. " and position is " .. x .. "x" .. y)
+  -- hs.alert(screen.w .. "x" .. screen.h .. " " .. screen.x .. "x" .. screen.y)
+
+  local f = win:frame()
+  if math.floor(f.w) == math.floor(w) and math.floor(f.h) == math.floor(h) then
+    hs.alert("hi there")
+    w = w * 0.8
+    h = h * 0.8
+  end
+
+  local x = (screen.w - w) / 2
+  local y = (screen.h - h) / 2
+
+  win:setFrame { w = w, h = h, x = x, y = y }
 end)             
 
