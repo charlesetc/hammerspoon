@@ -30,6 +30,10 @@ hs.hotkey.bind({ "ctrl", "cmd" }, "Z", function()
   hs.executeTerminal("/usr/local/bin/exec-in ~/ /Users/charles/bin/nvim ~/.zshrc")
 end)
 
+hs.hotkey.bind({"ctrl", "cmd"}, "forwarddelete", function()
+  hs.execute("pmset sleepnow")
+end)             
+
 
 hiddenApplications = {}
 
