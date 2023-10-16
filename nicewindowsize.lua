@@ -1,3 +1,5 @@
+local flr = math.floor
+
 hs.hotkey.bind({"cmd", "ctrl"}, "down", function()
   local screen = hs.screen.mainScreen():frame()
   local win = hs.window.frontmostWindow()
@@ -18,10 +20,10 @@ hs.hotkey.bind({"cmd", "ctrl"}, "down", function()
 
   local f = win:frame()
 
-  if math.floor(f.w) == math.floor(w  * 0.8) and math.floor(f.h) == math.floor(h * 0.8) then
+  if flr(f.w) == flr(w  * 0.8) and flr(f.h) == flr(h * 0.8) then
     w = w * 0.6
     h = h * 0.6
-  elseif math.floor(f.w) == math.floor(w) and math.floor(f.h) == math.floor(h) then
+  elseif flr(f.w) == flr(w) and flr(f.h) == flr(h) then
     w = w * 0.8
     h = h * 0.8
   end
@@ -42,7 +44,7 @@ hs.hotkey.bind({"cmd", "ctrl"}, "up", function()
 
   local f = win:frame()
 
-  if math.floor(f.w) == math.floor(w) and math.floor(f.h) == math.floor(h) then
+  if flr(f.w) == flr(w) and flr(f.h) == flr(h) then
     w = screen.w
     h = screen.h
   end
@@ -53,15 +55,26 @@ hs.hotkey.bind({"cmd", "ctrl"}, "up", function()
   win:setFrame { w = w, h = h, x = x, y = y }
 end)
 
+
+local margin = 50
+
 hs.hotkey.bind({"cmd", "ctrl"}, "left", function()
   local screen = hs.screen.mainScreen():frame()
   local win = hs.window.frontmostWindow()
 
-  local w = screen.w * 0.5 - 75
-  local h = screen.h - 100
+  local w = screen.w * 0.5 - margin * 1.5
+  local h = screen.h - margin * 2
+  local x = margin
+  local y = margin
 
-  local x = 50
-  local y = 50
+  local f = win:frame()
+  if flr(f.w) == flr(w) and flr(f.h) == flr(h) and
+    flr(f.x) == flr(x) and flr(f.y) == flr(y) then
+    w = screen.w * 0.5
+    h = screen.h
+    x = 0
+    y = 0
+  end
 
   win:setFrame { w = w, h = h, x = x, y = y }
 end)
@@ -70,11 +83,19 @@ hs.hotkey.bind({"cmd", "ctrl"}, "right", function()
   local screen = hs.screen.mainScreen():frame()
   local win = hs.window.frontmostWindow()
 
-  local w = screen.w * 0.5 - 75
-  local h = screen.h - 100
+  local w = screen.w * 0.5 - margin * 1.5
+  local h = screen.h - margin * 2
+  local x = screen.w * 0.5 + margin * 0.5
+  local y = margin
 
-  local x = screen.w * 0.5 + 25
-  local y = 50
+  local f = win:frame()
+  if flr(f.w) == flr(w) and flr(f.h) == flr(h) and
+    flr(f.x) == flr(x) and flr(f.y) == flr(y) then
+    w = screen.w * 0.5
+    h = screen.h
+    x = screen.w * 0.5
+    y = 0
+  end
 
   win:setFrame { w = w, h = h, x = x, y = y }
 end)
