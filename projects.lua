@@ -20,8 +20,12 @@ local function populateChooser()
   chooser:choices(lines)
 end
 
-hs.hotkey.bind({"cmd", "ctrl"}, "return", function()
-  chooser:query("")
-  populateChooser()
-  chooser:show()
-end)
+
+-- Removed this because I'm using this keybinding in vs code 
+-- and wasn't using it here
+
+-- hs.hotkey.bind({"cmd", "ctrl"}, "return", function()
+--   chooser:query("")
+--   populateChooser()
+--   chooser:show()
+-- end)

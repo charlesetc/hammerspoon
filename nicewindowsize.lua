@@ -1,9 +1,10 @@
 local flr = math.floor
 
-hs.hotkey.bind({"cmd", "ctrl"}, "down", function()
-  local screen = hs.screen.mainScreen():frame()
+hs.hotkey.bind({ "cmd", "ctrl" }, "down", function()
+  print("down")
   local win = hs.window.frontmostWindow()
-  local app = win:application()
+  local app = hs.application.frontmostApplication()
+  local screen = win:screen():frame()
 
   local w = screen.w * 0.85
   local h = screen.h * 0.9
@@ -28,16 +29,16 @@ hs.hotkey.bind({"cmd", "ctrl"}, "down", function()
     h = h * 0.8
   end
 
-  local x = (screen.w - w) / 2
-  local y = (screen.h - h) / 2
+  local x = screen.x + (screen.w - w) / 2
+  local y = screen.y + (screen.h - h) / 2
 
-  win:setFrame { w = w, h = h, x = x, y = y }
+  win:setFrameInScreenBounds { w = w, h = h, x = x, y = y }
 end)
 
 
-hs.hotkey.bind({"cmd", "ctrl"}, "up", function()
-  local screen = hs.screen.mainScreen():frame()
+hs.hotkey.bind({ "cmd", "ctrl" }, "up", function()
   local win = hs.window.frontmostWindow()
+  local screen = win:screen():frame()
 
   local w = screen.w - 100
   local h = screen.h - 100
@@ -49,8 +50,8 @@ hs.hotkey.bind({"cmd", "ctrl"}, "up", function()
     h = screen.h
   end
 
-  local x = (screen.w - w) / 2
-  local y = (screen.h - h) / 2
+  local x = screen.x + (screen.w - w) / 2
+  local y = screen.y + (screen.h - h) / 2
 
   win:setFrame { w = w, h = h, x = x, y = y }
 end)
@@ -58,9 +59,9 @@ end)
 
 local margin = 50
 
-hs.hotkey.bind({"cmd", "ctrl"}, "left", function()
-  local screen = hs.screen.mainScreen():frame()
+hs.hotkey.bind({ "cmd", "ctrl" }, "left", function()
   local win = hs.window.frontmostWindow()
+  local screen = win:screen():frame()
 
   local w = screen.w * 0.5 - margin * 1.5
   local h = screen.h - margin * 2
@@ -76,12 +77,12 @@ hs.hotkey.bind({"cmd", "ctrl"}, "left", function()
     y = 0
   end
 
-  win:setFrame { w = w, h = h, x = x, y = y }
+  win:setFrame { w = w, h = h, x = screen.x + x, y = screen.y + y }
 end)
 
-hs.hotkey.bind({"cmd", "ctrl"}, "right", function()
-  local screen = hs.screen.mainScreen():frame()
+hs.hotkey.bind({ "cmd", "ctrl" }, "right", function()
   local win = hs.window.frontmostWindow()
+  local screen = win:screen():frame()
 
   local w = screen.w * 0.5 - margin * 1.5
   local h = screen.h - margin * 2
@@ -97,7 +98,7 @@ hs.hotkey.bind({"cmd", "ctrl"}, "right", function()
     y = 0
   end
 
-  win:setFrame { w = w, h = h, x = x, y = y }
+  win:setFrame { w = w, h = h, x = screen.x + x, y = screen.y + y }
 end)
 
 
