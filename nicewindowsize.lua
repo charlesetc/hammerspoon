@@ -100,6 +100,3 @@ hs.hotkey.bind({ "cmd", "ctrl" }, "right", function()
 
   win:setFrame { w = w, h = h, x = screen.x + x, y = screen.y + y }
 end)
-
-
-

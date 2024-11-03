@@ -1,3 +1,14 @@
+require("hs.ipc")
+
+function launchITerm()
+  hs.application.launchOrFocus("iTerm")
+  hs.application.get("Code"):hide()
+end
+
+function launchVisualStudioCode()
+  hs.application.launchOrFocus("Visual Studio Code")
+  hs.application.get("iTerm"):hide()
+end
 function hs.executeTerminal(s)
   iterm = hs.application("iTerm")
   iterm:activate()
@@ -6,6 +17,20 @@ function hs.executeTerminal(s)
   hs.eventtap.keyStroke({}, "return")
 end
 
+function toggleUnity()
+  local currentApp = hs.window.focusedWindow():application()
+  if currentApp:name() == "Unity" then
+    hs.application.get("Unity"):hide()
+  else
+    local apps = hs.application.runningApplications()
+    for _, app in ipairs(apps) do
+      if app:name() == "Unity" then
+        app:activate()
+        break
+      end
+    end
+  end
+end
 hs.window.animationDuration = 0.1
 
 hs.hotkey.bind({ "ctrl", "cmd" }, "r", function()
@@ -30,9 +55,9 @@ hs.hotkey.bind({ "ctrl", "cmd" }, "Z", function()
   hs.executeTerminal("/usr/local/bin/exec-in ~/ /Users/charles/bin/nvim ~/.zshrc")
 end)
 
-hs.hotkey.bind({"ctrl", "cmd"}, "forwarddelete", function()
+hs.hotkey.bind({ "ctrl", "cmd" }, "forwarddelete", function()
   hs.execute("pmset sleepnow")
-end)             
+end)
 
 
 hiddenApplications = {}
@@ -81,6 +106,19 @@ end)
 -- and resize well
 
 
+-- hs.hotkey.bind({ "ctrl", "cmd" }, "I", function()
+--   local iterm = hs.application.find("iTerm")
+--   if not iterm then
+--     hs.application.launchOrFocus("iTerm")
+--   else
+--     local vscode = hs.application.find("Visual Studio Code")
+--     if not vscode then
+--       hs.application.launchOrFocus("Visual Studio Code")
+--     else
+--       vscode:activate()
+--     end
+--   end
+-- end)
 hs.hotkey.bind({ "ctrl", "cmd" }, "H", function()
   hs.executeTerminal("/usr/local/bin/exec-in ~/.hammerspoon /Users/charles/bin/nvim init.lua")
 end)
