@@ -63,18 +63,18 @@ hs.hotkey.bind({ "cmd", "ctrl" }, "left", function()
   local win = hs.window.frontmostWindow()
   local screen = win:screen():frame()
 
-  local w = screen.w * 0.5 - margin * 1.5
-  local h = screen.h - margin * 2
-  local x = margin
-  local y = margin
+  local w = screen.w * 0.5
+  local h = screen.h
+  local x = 0
+  local y = 0
 
   local f = win:frame()
   if flr(f.w) == flr(w) and flr(f.h) == flr(h) and
     flr(f.x) == flr(x) and flr(f.y) == flr(y) then
-    w = screen.w * 0.5
-    h = screen.h
-    x = 0
-    y = 0
+    w = screen.w * 0.5 - margin * 1.5
+    h = screen.h - margin * 2
+    x = margin
+    y = margin
   end
 
   win:setFrame { w = w, h = h, x = screen.x + x, y = screen.y + y }
@@ -84,18 +84,18 @@ hs.hotkey.bind({ "cmd", "ctrl" }, "right", function()
   local win = hs.window.frontmostWindow()
   local screen = win:screen():frame()
 
-  local w = screen.w * 0.5 - margin * 1.5
-  local h = screen.h - margin * 2
-  local x = screen.w * 0.5 + margin * 0.5
-  local y = margin
+  local w = screen.w * 0.5
+  local h = screen.h
+  local x = screen.w * 0.5
+  local y = 0
 
   local f = win:frame()
   if flr(f.w) == flr(w) and flr(f.h) == flr(h) and
-    flr(f.x) == flr(x) and flr(f.y) == flr(y) then
-    w = screen.w * 0.5
-    h = screen.h
-    x = screen.w * 0.5
-    y = 0
+      flr(f.x) == flr(x) and flr(f.y) == flr(y) then
+    w = screen.w * 0.5 - margin * 1.5
+    h = screen.h - margin * 2
+    x = screen.w * 0.5 + margin * 0.5
+    y = margin
   end
 
   win:setFrame { w = w, h = h, x = screen.x + x, y = screen.y + y }
