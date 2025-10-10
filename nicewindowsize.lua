@@ -20,8 +20,8 @@ hs.hotkey.bind({ "cmd", "ctrl" }, "down", function()
   end
 
   if app:name() == "Bike" then
-    w = 600
-    h = 700
+    w = 650
+    h = 750
   end
   local f = win:frame()
 

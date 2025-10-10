@@ -126,6 +126,15 @@ end)
 hs.alert.defaultStyle.atScreenEdge = 1
 
 
+--- Bike tire hotkey only when bike app is focused
+
+local bikeHotkey = hs.hotkey.new({ "cmd", "shift" }, "2", function()
+  hs.execute("osascript $HOME/code/bike-tire/main.applescript")
+end)
+
+hs.window.filter.new("Bike")
+    :subscribe(hs.window.filter.windowFocused, function() bikeHotkey:enable() end)
+    :subscribe(hs.window.filter.windowUnfocused, function() bikeHotkey:disable() end)
 -- Reload automatically
 hs.loadSpoon("ReloadConfiguration")
 spoon.ReloadConfiguration:start()
