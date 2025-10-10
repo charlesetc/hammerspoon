@@ -19,6 +19,10 @@ hs.hotkey.bind({ "cmd", "ctrl" }, "down", function()
     h = 700
   end
 
+  if app:name() == "Bike" then
+    w = 600
+    h = 700
+  end
   local f = win:frame()
 
   if flr(f.w) == flr(w  * 0.8) and flr(f.h) == flr(h * 0.8) then
